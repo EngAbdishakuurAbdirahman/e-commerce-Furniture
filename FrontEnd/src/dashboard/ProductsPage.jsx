@@ -416,12 +416,136 @@
 
 //Allahu Akbar
 
+// import { useEffect, useState } from "react";
+// import axios from "axios";
+
+// const AddProductForm = () => {
+//   const [products, setProducts] = useState([]);
+//   const [formData, setFormData] = useState({ title: "", price: "", img: null });
+//   const [preview, setPreview] = useState(null); // For Image Preview
+//   const [loading, setLoading] = useState(false);
+
+//   useEffect(() => {
+//     fetchProducts();
+//   }, []);
+
+//   const fetchProducts = async () => {
+//     try {
+//       const { data } = await axios.get("http://localhost:5000/api/products");
+//       setProducts(data);
+//     } catch (error) {
+//       console.error("Error fetching products:", error);
+//     }
+//   };
+
+//   // Handle Input Change
+//   const handleChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   // Handle File Input (Image)
+//   const handleFileChange = (e) => {
+//     const file = e.target.files[0];
+//     setFormData({ ...formData, img: file });
+//     setPreview(URL.createObjectURL(file)); // Show Image Preview
+//   };
+
+//   // Create Product
+//   const handleAddProduct = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+
+//     const formDataToSend = new FormData();
+//     formDataToSend.append("title", formData.title);
+//     formDataToSend.append("price", formData.price);
+//     formDataToSend.append("img", formData.img);
+
+//     try {
+//       await axios.post("http://localhost:5000/api/products", formDataToSend, {
+//         headers: { "Content-Type": "multipart/form-data" },
+//       });
+//       fetchProducts();
+//       setFormData({ title: "", price: "", img: null });
+//       setPreview(null);
+//       alert("✅ Product Added Successfully!");
+//     } catch (error) {
+//       console.error("Error adding product:", error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+//       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+//         <h2 className="text-2xl font-bold text-center mb-4">Add New Product</h2>
+//         <form onSubmit={handleAddProduct} className="space-y-4">
+//           <div>
+//             <label className="block text-gray-700 font-medium">Title</label>
+//             <input
+//               type="text"
+//               name="title"
+//               value={formData.title}
+//               onChange={handleChange}
+//               className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
+//               required
+//             />
+//           </div>
+
+//           <div>
+//             <label className="block text-gray-700 font-medium">Price</label>
+//             <input
+//               type="number"
+//               name="price"
+//               value={formData.price}
+//               onChange={handleChange}
+//               className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
+//               required
+//             />
+//           </div>
+
+//           <div>
+//             <label className="block text-gray-700 font-medium">Image</label>
+//             <input
+//               type="file"
+//               name="img"
+//               onChange={handleFileChange}
+//               className="w-full px-4 py-2 border rounded-lg"
+//               required
+//             />
+//           </div>
+
+//           {preview && (
+//             <div className="text-center">
+//               <p className="text-gray-500 text-sm">Image Preview</p>
+//               <img src={preview} alt="Preview" className="w-32 h-32 object-cover mx-auto rounded-lg shadow-lg" />
+//             </div>
+//           )}
+
+//           <button
+//             type="submit"
+//             className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+//             disabled={loading}
+//           >
+//             {loading ? "Adding Product..." : "Add Product"}
+//           </button>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default AddProductForm;
+
+
+
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 const AddProductForm = () => {
   const [products, setProducts] = useState([]);
-  const [formData, setFormData] = useState({ title: "", price: "", img: null });
+  const [formData, setFormData] = useState({ title: "", price: "", category: "", img: null });
   const [preview, setPreview] = useState(null); // For Image Preview
   const [loading, setLoading] = useState(false);
 
@@ -458,6 +582,7 @@ const AddProductForm = () => {
     const formDataToSend = new FormData();
     formDataToSend.append("title", formData.title);
     formDataToSend.append("price", formData.price);
+    formDataToSend.append("category", formData.category); // ✅ Category waa la dirayaa
     formDataToSend.append("img", formData.img);
 
     try {
@@ -465,7 +590,7 @@ const AddProductForm = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
       fetchProducts();
-      setFormData({ title: "", price: "", img: null });
+      setFormData({ title: "", price: "", category: "", img: null });
       setPreview(null);
       alert("✅ Product Added Successfully!");
     } catch (error) {
@@ -502,6 +627,28 @@ const AddProductForm = () => {
               className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
               required
             />
+          </div>
+
+          {/* ✅ Category Selection */}
+          <div>
+            <label className="block text-gray-700 font-medium">Category</label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300"
+              required
+            >
+              <option value="">Select Category</option>
+              <option value="BedRoom">BedRoom</option>
+              <option value="LivingRoom">LivingRoom</option>
+              <option value="Showcase">Showcase</option>
+              <option value="Flowers">Curtains and Rugs</option>
+              <option value="Flowers">Flowers</option>
+              <option value="Flowers">Tables</option>
+              <option value="Flowers">TV Stands</option>
+              <option value="Flowers">Kitchen Furniture </option>
+            </select>
           </div>
 
           <div>

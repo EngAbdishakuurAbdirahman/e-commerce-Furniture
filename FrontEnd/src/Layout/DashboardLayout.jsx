@@ -95,6 +95,60 @@
 
 
 
+// import React, { useState } from "react";
+// import { Link, Outlet } from "react-router-dom";
+// import { FaTachometerAlt, FaBoxOpen, FaUsers, FaFileAlt, FaSignOutAlt, FaBars } from "react-icons/fa";
+
+// const DashboardLayout = () => {
+//   const [isOpen, setIsOpen] = useState(true);
+
+//   return (
+//     <div className="flex">
+//       {/* Sidebar */}
+//       <aside className={`bg-[#183B50] h-screen ${isOpen ? "w-56" : "w-20"} transition-all duration-300 fixed text-white`}>
+//         <div className="flex items-center justify-between p-5">
+//           <h2 className={`text-xl font-bold ${!isOpen && "hidden"} transition-all duration-300`}>Admin Panel</h2>
+//           <button onClick={() => setIsOpen(!isOpen)} className="text-white">
+//             <FaBars size={20} />
+//           </button>
+//         </div>
+
+//         <nav className="flex flex-col space-y-4 mt-4">
+//           <Link to="/dashboard" className="flex items-center px-5 py-3 hover:bg-gray-700 transition-all">
+//             <FaTachometerAlt size={20} />
+//             {isOpen && <span className="ml-3">Dashboard</span>}
+//           </Link>
+//           <Link to="/dashboard/products" className="flex items-center px-5 py-3 hover:bg-gray-700 transition-all">
+//             <FaBoxOpen size={20} />
+//             {isOpen && <span className="ml-3">Products</span>}
+//           </Link>
+//           <Link to="/dashboard/users" className="flex items-center px-5 py-3 hover:bg-gray-700 transition-all">
+//             <FaUsers size={20} />
+//             {isOpen && <span className="ml-3">Users</span>}
+//           </Link>
+//           <Link to="/dashboard/orders" className="flex items-center px-5 py-3 hover:bg-gray-700 transition-all">
+//             <FaFileAlt size={20} />
+//             {isOpen && <span className="ml-3">Orders</span>}
+//           </Link>
+//           <Link to="/LoginPage" className="flex items-center px-5 py-3 hover:bg-red-600 transition-all">
+//             <FaSignOutAlt size={20} />
+//             {isOpen && <span className="ml-3">Logout</span>}
+//           </Link>
+//         </nav>
+//       </aside>
+
+//       {/* Main Content */}
+//       <div className={`ml-${isOpen ? "64" : "20"} p-6 flex-1 transition-all duration-300`}>
+//         <Outlet />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default DashboardLayout;
+
+
+
 import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { FaTachometerAlt, FaBoxOpen, FaUsers, FaFileAlt, FaSignOutAlt, FaBars } from "react-icons/fa";
@@ -105,7 +159,7 @@ const DashboardLayout = () => {
   return (
     <div className="flex">
       {/* Sidebar */}
-      <aside className={`bg-[#183B50] h-screen ${isOpen ? "w-64" : "w-20"} transition-all duration-300 fixed text-white`}>
+      <aside className={`bg-[#183B50] h-screen ${isOpen ? "w-68" : "w-20"} transition-all duration-300 fixed text-white`}>
         <div className="flex items-center justify-between p-5">
           <h2 className={`text-xl font-bold ${!isOpen && "hidden"} transition-all duration-300`}>Admin Panel</h2>
           <button onClick={() => setIsOpen(!isOpen)} className="text-white">
@@ -122,23 +176,31 @@ const DashboardLayout = () => {
             <FaBoxOpen size={20} />
             {isOpen && <span className="ml-3">Products</span>}
           </Link>
+
+          <Link to="/dashboard/productsList" className="flex items-center px-5 py-3 hover:bg-gray-700 transition-all">
+            <FaBoxOpen size={20} />
+            {isOpen && <span className="ml-3">All Products</span>}
+          </Link>
           <Link to="/dashboard/users" className="flex items-center px-5 py-3 hover:bg-gray-700 transition-all">
             <FaUsers size={20} />
             {isOpen && <span className="ml-3">Users</span>}
           </Link>
           <Link to="/dashboard/orders" className="flex items-center px-5 py-3 hover:bg-gray-700 transition-all">
             <FaFileAlt size={20} />
+
+            
             {isOpen && <span className="ml-3">Orders</span>}
           </Link>
           <Link to="/LoginPage" className="flex items-center px-5 py-3 hover:bg-red-600 transition-all">
             <FaSignOutAlt size={20} />
             {isOpen && <span className="ml-3">Logout</span>}
           </Link>
+          
         </nav>
       </aside>
 
       {/* Main Content */}
-      <div className={`ml-${isOpen ? "64" : "20"} p-6 flex-1 transition-all duration-300`}>
+      <div className={`ml-${isOpen ? "56" : "20"} p-6 flex-1 transition-all duration-300`}>
         <Outlet />
       </div>
     </div>
